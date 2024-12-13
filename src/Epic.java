@@ -19,13 +19,4 @@ public class Epic extends Task {
     public List<Subtask> getSubtasks() {
         return subtasks;
     }
-
-    public void addSubtask(Subtask subtask) {
-        this.subtasks.add(subtask);
-    }
-
-    public void removeSubtask(Subtask subtask) {
-        this.subtasks.remove(subtask);
-    }
-
 }

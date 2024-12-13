@@ -7,17 +7,17 @@ public class TaskManager {
     public HashMap<Integer, Subtask> idToSubtask = new HashMap<>();
     private Integer counter = 0;
 
-    // получение списка всех задач ✅ Task
+    // получение списка всех задач Task
     public String findAllTasks() {
         return idToTask.toString();
     }
 
-    // удаление всех задач Task ✅
+    // удаление всех задач Task
     public void deleteAllTasks() {
         idToTask.clear();
     }
 
-    // получение задачи Task по id ✅
+    // получение задачи Task по id
     public Task findTasksById(Integer id) {
         Task task = idToTask.get(id);
         if (task == null) {
@@ -26,7 +26,7 @@ public class TaskManager {
         return task;
     }
 
-    // добавление задачи Task в HashMap idToTask ✅
+    // добавление задачи Task в HashMap idToTask
     public Task createTask(Task task) {
         counter++;
         task.setId(counter);
@@ -34,7 +34,7 @@ public class TaskManager {
         return task;
     }
 
-    // обновление задачи Task в HashMap idToTask ✅
+    // обновление задачи Task в HashMap idToTask
     public Task updateTask(Task task) {
         if (idToTask.containsKey(task.getId())) {
             Task t = idToTask.get(task.getId());
@@ -48,13 +48,13 @@ public class TaskManager {
         }
     }
 
-    // удаление задачи Task из HashMap idToTask ✅
+    // удаление задачи Task из HashMap idToTask
     public Task deleteTask(Integer id) {
         Task t = idToTask.remove(id);
         return t;
     }
 
-    // создание нового Epic ✅
+    // создание нового Epic
     public Epic createEpic(Epic epic) {
         counter++;
         epic.setId(counter);
@@ -62,7 +62,7 @@ public class TaskManager {
         return epic;
     }
 
-    // Поиск Epic по id ✅
+    // Поиск Epic по id
     public Epic findEpicById(Integer id) {
         Epic epic = idToEpic.get(id);
         if (epic == null) {
@@ -71,7 +71,7 @@ public class TaskManager {
         return epic;
     }
 
-    // Создание нового Subtask ✅
+    // Создание нового Subtask
     public Subtask createSubtask(Subtask subtask, Epic epic) {
         counter++;
         subtask.setId(counter);
@@ -80,17 +80,17 @@ public class TaskManager {
         return subtask;
     }
 
-    // Печать всех Epic ✅
+    // Печать всех Epic
     public String findAllEpics() {
         return idToEpic.toString();
     }
 
-    // Печать всех Subtask ✅
+    // Печать всех Subtask
     public String findAllSubtasks() {
         return idToSubtask.toString();
     }
 
-    // Возврат всех Subtask определенного Epic ✅
+    // Возврат всех Subtask определенного Epic
     public ArrayList<Subtask> getSubtasksForEpic(Epic epic) {
         epic = idToEpic.get(epic.getId());
         if (epic != null) {
@@ -101,7 +101,7 @@ public class TaskManager {
         return null;
     }
 
-    // Обновление Epic ✅
+    // Обновление Epic
     public Epic updateEpic(Epic oldEpic, Epic newEpic) {
         if (idToEpic.containsKey(oldEpic.getId())) {
             Epic existingEpic = idToEpic.get(oldEpic.getId());
@@ -113,7 +113,7 @@ public class TaskManager {
         return null;
     }
 
-    // Обновление Subtask ✅
+    // Обновление Subtask
     public Subtask updateSubtask(Subtask oldSubtask, Subtask newSubtask) {
         if (idToSubtask.containsKey(oldSubtask.getId())) {
             Subtask existingSubtask = idToSubtask.get(oldSubtask.getId());
@@ -129,7 +129,7 @@ public class TaskManager {
         return null;
     }
 
-    // Определение статуса Epic ✅
+    // Определение статуса Epic
     private Status calculateEpicStatus(Epic epic) {
         for (Subtask subtask : epic.getSubtasks()) {
             if (subtask.getStatus().equals(Status.NEW) || subtask.getStatus().equals(Status.IN_PROGRESS)) {
@@ -139,7 +139,7 @@ public class TaskManager {
         return Status.DONE;
     }
 
-    // Поиск Epic по Subtask ✅
+    // Поиск Epic по Subtask
     public Epic findEpicForSubtask(Subtask subtask) {
         for (Epic epic : idToEpic.values()) {
             if (epic.getSubtasks().contains(subtask)) {
@@ -149,7 +149,7 @@ public class TaskManager {
         return null;
     }
 
-    // Возврат Subtask по id ✅
+    // Возврат Subtask по id
     public Subtask getSubtaskForEpicId(Epic epic, Integer subtaskId) {
         if (idToEpic.containsKey(epic.getId())) {
             for (Subtask subtask : idToEpic.get(epic.getId()).getSubtasks()) {
@@ -161,7 +161,7 @@ public class TaskManager {
         return null;
     }
 
-    // Удаление Subtask из Epic ✅
+    // Удаление Subtask из Epic
     public void removeSubtaskFromEpic(Epic epic, Subtask subtask) {
         if (idToEpic.containsKey(epic.getId())) {
             for (Subtask tempSubtask : idToEpic.get(epic.getId()).getSubtasks()) {
@@ -174,21 +174,21 @@ public class TaskManager {
         }
     }
 
-    // Удаление Epic ✅
+    // Удаление Epic
     public void removeEpic(Epic epic) {
         if (idToEpic.containsKey(epic.getId())) {
             idToEpic.remove(epic.getId());
         }
     }
 
-    // Удаление Epic по id ✅
+    // Удаление Epic по id
     public void removeEpicById(Integer id) {
         if (idToEpic.containsKey(id)) {
             idToEpic.remove(id);
         }
     }
 
-    // Удаление Subtask по id ✅
+    // Удаление Subtask по id
     public void removeSubtaskById(Integer id) {
         Subtask tempSubtask = idToSubtask.get(id);
         Epic tempEpic = findEpicForSubtask(tempSubtask);
@@ -201,7 +201,7 @@ public class TaskManager {
         }
     }
 
-    // Удаление всех Task, Epic и Subtask ✅
+    // Удаление всех Task, Epic и Subtask
     public void removeAll() {
         idToTask.clear();
         idToEpic.clear();
