@@ -1,3 +1,5 @@
+package ru.yandex.javacource.kuzmindv.schedule.task;
+
 import java.util.Objects;
 
 public class Task {
@@ -8,7 +10,7 @@ public class Task {
     private Status status;
 
 
-    Task(Integer id, String name, String description, Status status) {
+    public Task(Integer id, String name, String description, Status status) {
         this.name = name;
         this.description = description;
         this.status = status;
@@ -31,11 +33,11 @@ public class Task {
         this.description = description;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -62,7 +64,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return "Task{" +
+        return "ru.yandex.javacource.kuzmindv.schedule.task.Task{" +
                 "name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", id=" + id +
