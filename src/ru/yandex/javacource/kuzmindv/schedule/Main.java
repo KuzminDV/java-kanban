@@ -1,3 +1,5 @@
+package ru.yandex.javacource.kuzmindv.schedule;
+
 import ru.yandex.javacource.kuzmindv.schedule.manager.TaskManager;
 import ru.yandex.javacource.kuzmindv.schedule.task.Epic;
 import ru.yandex.javacource.kuzmindv.schedule.task.Status;
