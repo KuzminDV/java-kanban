@@ -66,23 +66,23 @@ public class Main {
 
         System.out.println("Добавление нового Epic1 и его Subtasks");
         taskManager.createEpic(epic1);
-        taskManager.createSubtask(subtask11, epic1);
-        taskManager.createSubtask(subtask12, epic1);
-        taskManager.createSubtask(subtask13, epic1);
+        taskManager.createSubtask(subtask11);
+        taskManager.createSubtask(subtask12);
+        taskManager.createSubtask(subtask13);
         System.out.println("Печать всех эпиков после добавления ✅");
-        System.out.println(taskManager.findAllEpics());
+        System.out.println(taskManager.getEpics());
         System.out.println("Печать всех Subtasks ✅");
-        System.out.println(taskManager.findAllSubtasks());
+        System.out.println(taskManager.getSubtasks());
 
         System.out.println("Добавление нового Epic2 и его Subtasks");
         taskManager.createEpic(epic2);
-        taskManager.createSubtask(subtask21, epic2);
-        taskManager.createSubtask(subtask22, epic2);
-        taskManager.createSubtask(subtask23, epic2);
+        taskManager.createSubtask(subtask21);
+        taskManager.createSubtask(subtask22);
+        taskManager.createSubtask(subtask23);
         System.out.println("Печать всех эпиков после добавления ✅");
-        System.out.println(taskManager.findAllEpics());
+        System.out.println(taskManager.getEpics());
         System.out.println("Печать всех Subtasks ✅");
-        System.out.println(taskManager.findAllSubtasks());
+        System.out.println(taskManager.getSubtasks());
 
         System.out.println("Печать всех Subtasks по Epic1 ✅");
         for (Subtask subtask : taskManager.getSubtasksForEpic(epic1.getId())) { System.out.println(subtask.toString());}
@@ -98,11 +98,11 @@ public class Main {
         for (Subtask subtask : taskManager.getSubtasksForEpic(epic2.getId())) { System.out.println(subtask.toString());}
 
         System.out.println("Печать всех Эпиков  ✅");
-        System.out.println(taskManager.findAllEpics());
+        System.out.println(taskManager.getEpics());
         System.out.println("Обновление ru.yandex.javacource.kuzmindv.schedule.task.Epic 2 ✅");
         taskManager.updateEpic(epic2New);
         System.out.println("Получение списка всех Epics: ✅");
-        System.out.println(taskManager.findAllEpics());
+        System.out.println(taskManager.getEpics());
         System.out.println(epic2.getSubtasks());
         System.out.println(taskManager.subtasks.values());
 
@@ -122,8 +122,6 @@ public class Main {
         System.out.println("Поиск ru.yandex.javacource.kuzmindv.schedule.task.Epic  по id ✅");
         System.out.println(taskManager.findEpicById(epic1.getId()));
 
-        System.out.println("Удаление Subtask11 из Epic1 ✅");
-        taskManager.removeSubtaskFromEpic(subtask11.getId());
         System.out.println("Получение списка всех Subtasks Epic1: ✅");
         for (Subtask subtask : taskManager.getSubtasksForEpic(epic1.getId())) {
             if(subtask == null){
@@ -157,7 +155,7 @@ public class Main {
         System.out.println("Получение статуса Epic2: ✅" + epic2.getStatus());
 
         System.out.println("Печать всех ru.yandex.javacource.kuzmindv.schedule.task.Epic ✅");
-        System.out.println(taskManager.findAllEpics());
+        System.out.println(taskManager.getEpics());
         System.out.println("Печать всех Subtasks по Epic1 ✅");
         for (Subtask subtask : taskManager.getSubtasksForEpic(epic1.getId())) {
             if(subtask == null){
@@ -167,9 +165,9 @@ public class Main {
         }
 
         System.out.println("Добавление Subtask25✅");
-        taskManager.createSubtask(subtask25, epic2);
+        taskManager.createSubtask(subtask25);
         System.out.println("Печать всех ru.yandex.javacource.kuzmindv.schedule.task.Epic после добавление Subtask25 ✅");
-        System.out.println(taskManager.findAllEpics());
+        System.out.println(taskManager.getEpics());
         System.out.println("Печать всех Subtasks по Epic2 ✅");
         for (Subtask subtask : taskManager.getSubtasksForEpic(epic2.getId())) {
             if(subtask == null){
@@ -211,19 +209,11 @@ public class Main {
 //            System.out.println(subtask.toString());
 //        }
 //
-        System.out.println("Удаление всех Tusk, ru.yandex.javacource.kuzmindv.schedule.task.Epic,ru.yandex.javacource.kuzmindv.schedule.task.Subtask");
-        taskManager.removeAll();
-        System.out.println("Печать всех задач");
-        System.out.println(taskManager.getTasks().toString());
-        System.out.println(taskManager.findAllEpics());
-        System.out.println(taskManager.findAllSubtasks());
-
-
-
-
-
-
-
-
+//        System.out.println("Удаление всех Tusk, ru.yandex.javacource.kuzmindv.schedule.task.Epic,ru.yandex.javacource.kuzmindv.schedule.task.Subtask");
+//        taskManager.removeAll();
+//        System.out.println("Печать всех задач");
+//        System.out.println(taskManager.getTasks().toString());
+//        System.out.println(taskManager.findAllEpics());
+//        System.out.println(taskManager.findAllSubtasks());
     }
 }

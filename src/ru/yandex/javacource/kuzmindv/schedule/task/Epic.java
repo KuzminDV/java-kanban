@@ -21,10 +21,6 @@ public class Epic extends Task {
 
     @Override
     public String toString() {
-        return "ru.yandex.javacource.kuzmindv.schedule.task.Epic{" +
-                "subtasksIds=" + subtasksIds +
-                '}';
+        return "Epic{" + "subtasksIds=" + subtasksIds + super.toString() + '}';
     }
-
-
 }

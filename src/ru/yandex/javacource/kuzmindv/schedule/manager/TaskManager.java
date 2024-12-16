@@ -71,23 +71,27 @@ public class TaskManager {
     }
 
     // Создание нового ru.yandex.javacource.kuzmindv.schedule.task.Subtask
-    public Subtask createSubtask(Subtask subtask, Epic epic) {
+    public Subtask createSubtask(Subtask subtask) {
         counter++;
+        Integer epicId = subtask.getEpicId();
+        Epic epic = epics.get(epicId);
+        if (epic == null) {
+            return null;
+        }
+        subtask.setEpicId(epicId);
         subtask.setId(counter);
-        subtask.setEpicId(epic.getId());
         subtasks.put(counter, subtask);
         epic.setSubtasksIds(subtask.getId());
+        calculateEpicStatus(epicId);
         return subtask;
     }
 
-    // Печать всех ru.yandex.javacource.kuzmindv.schedule.task.Epic
-    public String findAllEpics() {
-        return epics.toString();
+    public ArrayList<Task> getEpics() {
+        return new ArrayList<>(epics.values());
     }
 
-    // Печать всех ru.yandex.javacource.kuzmindv.schedule.task.Subtask
-    public String findAllSubtasks() {
-        return subtasks.toString();
+    public ArrayList<Task> getSubtasks() {
+        return new ArrayList<>(subtasks.values());
     }
 
     // Возврат всех ru.yandex.javacource.kuzmindv.schedule.task.Subtask определенного ru.yandex.javacource.kuzmindv.schedule.task.Epic
@@ -122,50 +126,38 @@ public class TaskManager {
         if (epic == null) {
             return;
         }
-        savedSubtask.setName(subtask.getName());
-        savedSubtask.setDescription(subtask.getDescription());
-        savedSubtask.setStatus(subtask.getStatus());
-        savedSubtask.setEpicId(subtask.getEpicId());
-        savedSubtask.setId(subtask.getId());
-
         subtasks.put(subtask.getId(), savedSubtask);
         calculateEpicStatus(subtask.getEpicId());
     }
 
+
     // Определение статуса ru.yandex.javacource.kuzmindv.schedule.task.Epic
     private void calculateEpicStatus(Integer epicId) {
-            if (epics.containsKey(epicId)) {
-                Epic epic = epics.get(epicId);
-                boolean isDone = true;
-                boolean isNew = true;
-                for (Integer subtaskId : epic.getSubtasks()) {
-                    if (!subtasks.get(subtaskId).getStatus().equals(Status.DONE)) {
-                        isDone = false;
-                    }
-                    if (!subtasks.get(subtaskId).getStatus().equals(Status.IN_PROGRESS)) {
-                        isNew = false;
-                    }
+        if (epics.containsKey(epicId)) {
+            Epic epic = epics.get(epicId);
+            boolean isDone = true;
+            boolean isNew = true;
+            for (Integer subtaskId : epic.getSubtasks()) {
+                if (!subtasks.get(subtaskId).getStatus().equals(Status.DONE)) {
+                    isDone = false;
                 }
-                if (isDone == true && isNew == false) {
-                    epic.setStatus(Status.DONE);
-                } else if (isDone == false && isNew == true) {
-                    epic.setStatus(Status.NEW);
-                } else {
-                    epic.setStatus(Status.IN_PROGRESS);
+                if (!subtasks.get(subtaskId).getStatus().equals(Status.IN_PROGRESS)) {
+                    isNew = false;
                 }
             }
+            if (isDone == true && isNew == false) {
+                epic.setStatus(Status.DONE);
+            } else if (isDone == false && isNew == true) {
+                epic.setStatus(Status.NEW);
+            } else {
+                epic.setStatus(Status.IN_PROGRESS);
+            }
+        }
     }
 
     // Возврат ru.yandex.javacource.kuzmindv.schedule.task.Subtask по id
     public Subtask getSubtask(Integer id) {
        return subtasks.get(id);
-    }
-
-    // Удаление ru.yandex.javacource.kuzmindv.schedule.task.Subtask из ru.yandex.javacource.kuzmindv.schedule.task.Epic
-    public void removeSubtaskFromEpic(Integer subtaskId) {
-        if (subtasks.containsKey(subtaskId)) {
-            subtasks.remove(subtaskId);
-        }
     }
 
     // Удаление ru.yandex.javacource.kuzmindv.schedule.task.Epic по id
@@ -193,18 +185,15 @@ public class TaskManager {
     // Удаление всех Epics
     public void removeAllEpics() {
         epics.clear();
+        subtasks.clear();
     }
 
     // Удаление всех Subtasks
     public void removeAllSubtasks() {
+        for (Epic epic : epics.values()) {
+            epic.getSubtasks().clear();
+            calculateEpicStatus(epic.getId());
+        }
         subtasks.clear();
     }
-
-    // Удаление всех ru.yandex.javacource.kuzmindv.schedule.task.Task, ru.yandex.javacource.kuzmindv.schedule.task.Epic и ru.yandex.javacource.kuzmindv.schedule.task.Subtask
-    public void removeAll() {
-        tasks.clear();
-        epics.clear();
-        subtasks.clear();
-    }
-
 }
