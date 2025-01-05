@@ -1,5 +1,4 @@
 package ru.yandex.javacource.kuzmindv.schedule.task;
-
 import java.util.ArrayList;
 
 public class Epic extends Task {
