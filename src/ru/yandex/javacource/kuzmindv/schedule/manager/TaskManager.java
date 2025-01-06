@@ -4,11 +4,13 @@ import ru.yandex.javacource.kuzmindv.schedule.task.Epic;
 import ru.yandex.javacource.kuzmindv.schedule.task.Subtask;
 import ru.yandex.javacource.kuzmindv.schedule.task.Task;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface TaskManager {
+    List<Task> getHistory();
+
     // получение списка всех задач ru.yandex.javacource.kuzmindv.schedule.task.Task
-    ArrayList<Task> getTasks();
+    List<Task> getTasks();
 
     // удаление всех задач ru.yandex.javacource.kuzmindv.schedule.task.Task
     void deleteAllTasks();
@@ -34,12 +36,12 @@ public interface TaskManager {
     // Создание нового ru.yandex.javacource.kuzmindv.schedule.task.Subtask
     Subtask createSubtask(Subtask subtask);
 
-    ArrayList<Task> getEpics();
+    List<Task> getEpics();
 
-    ArrayList<Task> getSubtasks();
+    List<Task> getSubtasks();
 
     // Возврат всех ru.yandex.javacource.kuzmindv.schedule.task.Subtask определенного ru.yandex.javacource.kuzmindv.schedule.task.Epic
-    ArrayList<Subtask> getSubtasksForEpic(Integer epicId);
+    List<Subtask> getSubtasksForEpic(Integer epicId);
 
     // Обновление ru.yandex.javacource.kuzmindv.schedule.task.Epic
     void updateEpic(Epic epic);
